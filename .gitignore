@@ -1,0 +1,27 @@
+# Dependências
+node_modules/
+
+# Build e que não deve ir ao repositório
+dist/
+coverage/
+.tmp/
+*.tsbuildinfo
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Diretórios de download/processamento
+temp/
+downloads/

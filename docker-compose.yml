@@ -1,0 +1,30 @@
+# Teste local da imagem Docker (mesmo comportamento do deploy).
+# Uso:
+#   docker compose up --build
+#   Acesse http://localhost:3000
+services:
+  app:
+    build:
+      context: .
+      args:
+        # Deixe vazio para mesmo-origem (recomendado).
+        VITE_API_URL: ${VITE_API_URL:-}
+    image: mediadownload:local
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      MAX_CONCURRENT: ${MAX_CONCURRENT:-2}
+      RATE_LIMIT_MAX: ${RATE_LIMIT_MAX:-20}
+      # Preencha apenas se o frontend rodar em outro domínio.
+      CORS_ORIGIN: ${CORS_ORIGIN:-}
+    volumes:
+      - app-downloads:/app/downloads
+      - app-temp:/app/temp
+      - app-logs:/app/logs
+    restart: unless-stopped
+
+volumes:
+  app-downloads:
+  app-temp:
+  app-logs:

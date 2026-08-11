@@ -1,0 +1,1228 @@
+# PROMPT MESTRE — CRIAÇÃO DE PLATAFORMA PROFISSIONAL DE DOWNLOAD DE MÍDIA
+
+Você é um **arquiteto de software sênior, engenheiro full-stack, especialista em UX/UI, SEO técnico, segurança, performance, acessibilidade e monetização com Google AdSense**.
+
+Seu objetivo é projetar e desenvolver uma plataforma web profissional, rápida, moderna, simples e intuitiva para permitir que usuários obtenham arquivos de mídia a partir de **URLs públicas de plataformas sociais e serviços de vídeo**, sempre respeitando direitos autorais, termos de serviço das plataformas e legislação aplicável.
+
+Não faça um projeto genérico.
+
+Pense usando princípios de engenharia de primeiros princípios:
+
+* eliminar complexidade desnecessária;
+* reduzir o número de cliques;
+* interface extremamente simples;
+* código limpo;
+* arquitetura modular;
+* alta velocidade;
+* baixo consumo de recursos;
+* segurança desde o início;
+* excelente experiência em celular;
+* SEO técnico impecável;
+* estrutura preparada para monetização;
+* facilidade de manutenção;
+* facilidade de adicionar novas plataformas posteriormente.
+
+---
+
+# 1. OBJETIVO DO PRODUTO
+
+Criar um site chamado:
+
+**[NOME DO PROJETO]**
+
+Proposta:
+
+> Uma ferramenta online simples para processar URLs públicas de conteúdo multimídia e disponibilizar opções de download quando tecnicamente permitido.
+
+O usuário deve conseguir:
+
+1. entrar na Home;
+2. colar uma URL;
+3. clicar em um botão principal;
+4. o sistema validar a URL;
+5. identificar a plataforma;
+6. processar o conteúdo quando permitido;
+7. apresentar as opções disponíveis;
+8. escolher o formato/qualidade;
+9. baixar o arquivo.
+
+O fluxo precisa ser extremamente simples.
+
+---
+
+# 2. PLATAFORMAS
+
+Preparar a arquitetura para trabalhar com URLs públicas de plataformas como:
+
+* YouTube
+* Facebook
+* Instagram
+* TikTok
+* Kwai
+* Pinterest
+* X/Twitter
+* Reddit
+* outras plataformas futuramente
+
+IMPORTANTE:
+
+Não implemente mecanismos destinados a burlar DRM, paywalls, autenticação, conteúdo privado, restrições técnicas ou sistemas de proteção.
+
+O sistema deve trabalhar apenas com conteúdo que possa ser processado legalmente e tecnicamente.
+
+Não permitir:
+
+* URLs privadas;
+* conteúdo protegido por login;
+* bypass de DRM;
+* quebra de proteção;
+* contorno de sistemas de segurança;
+* download de conteúdo quando isso violar claramente os direitos do proprietário.
+
+Adicionar uma mensagem informativa ao usuário:
+
+> “Use esta ferramenta somente para baixar conteúdos que você possui, tem autorização para utilizar ou cujo download seja permitido pelos termos da respectiva plataforma.”
+
+---
+
+# 3. TECNOLOGIA
+
+Antes de começar:
+
+1. analise o ambiente existente;
+2. identifique sistema operacional;
+3. identifique linguagem disponível;
+4. identifique banco de dados disponível;
+5. identifique servidor web;
+6. identifique versões instaladas;
+7. verifique dependências;
+8. verifique estrutura atual do projeto.
+
+NÃO destrua arquivos existentes sem autorização.
+
+Se o projeto estiver vazio, proponha a melhor stack moderna e leve.
+
+Priorizar:
+
+* HTML5
+* CSS moderno
+* JavaScript/TypeScript
+* backend seguro
+* API REST
+* banco de dados somente quando realmente necessário
+* arquitetura modular
+* componentes reutilizáveis
+
+Escolha a stack que ofereça melhor equilíbrio entre:
+
+* performance;
+* facilidade de manutenção;
+* segurança;
+* SEO;
+* simplicidade de deploy.
+
+---
+
+# 4. HOME PAGE
+
+Criar uma Home extremamente profissional.
+
+Estrutura:
+
+## HEADER
+
+Logo.
+
+Menu:
+
+* Início
+* Como funciona
+* Plataformas
+* FAQ
+* Sobre
+* Contato
+
+Botão opcional:
+
+**Começar agora**
+
+Header responsivo para desktop, tablet e celular.
+
+---
+
+# 5. HERO PRINCIPAL
+
+A primeira tela precisa explicar imediatamente o que o site faz.
+
+Título forte:
+
+**Baixe seus conteúdos favoritos de forma simples**
+
+Subtítulo:
+
+**Cole uma URL pública, processe o conteúdo e escolha uma opção disponível para download.**
+
+Campo principal:
+
+[ Cole aqui a URL ]
+
+Botão:
+
+**Processar URL**
+
+Adicionar ícone de colar URL.
+
+Adicionar botão:
+
+**Colar**
+
+Quando o usuário clicar:
+
+* validar URL;
+* detectar plataforma;
+* mostrar carregamento;
+* impedir múltiplos envios;
+* apresentar erro amigável quando necessário.
+
+---
+
+# 6. RESULTADO
+
+Após processar uma URL válida, mostrar um card profissional contendo:
+
+* miniatura quando disponível;
+* título;
+* plataforma;
+* duração quando disponível;
+* formatos disponíveis;
+* qualidade disponível;
+* tamanho estimado quando possível.
+
+Exemplo:
+
+**Vídeo encontrado**
+
+Formato:
+
+MP4
+
+Qualidade:
+
+1080p
+720p
+480p
+
+Botão:
+
+**Baixar**
+
+Para áudio, quando tecnicamente e legalmente permitido:
+
+MP3
+
+Botão:
+
+**Baixar áudio**
+
+Não apresentar opções inexistentes.
+
+Não inventar qualidade ou formatos.
+
+---
+
+# 7. IMAGENS
+
+Criar uma seção específica:
+
+## Baixar imagens de URLs públicas
+
+Permitir processamento de URLs de plataformas que disponibilizem imagens publicamente, respeitando os mesmos princípios de direitos autorais.
+
+Interface:
+
+[ Cole a URL da imagem ]
+
+Botão:
+
+**Obter imagem**
+
+Resultado:
+
+* preview;
+* resolução;
+* formato;
+* tamanho;
+* botão baixar.
+
+---
+
+# 8. PLATAFORMAS
+
+Criar uma seção visual:
+
+## Plataformas compatíveis
+
+Cards com:
+
+YouTube
+Facebook
+Instagram
+TikTok
+Kwai
+Pinterest
+X
+Reddit
+
+Não utilizar logos ou marcas de forma que pareça existir parceria oficial.
+
+Adicionar texto:
+
+> “A disponibilidade pode variar conforme as características da plataforma e as permissões do conteúdo.”
+
+---
+
+# 9. COMO FUNCIONA
+
+Criar uma seção com 3 passos.
+
+### 01 — Cole a URL
+
+Copie a URL pública do conteúdo desejado.
+
+### 02 — Processe
+
+Cole no campo e clique em processar.
+
+### 03 — Escolha
+
+Selecione uma opção disponível e faça o download.
+
+Visual extremamente limpo.
+
+---
+
+# 10. SEÇÃO DE BENEFÍCIOS
+
+Criar cards:
+
+### Rápido
+
+Processamento otimizado.
+
+### Simples
+
+Interface sem complicação.
+
+### Responsivo
+
+Funciona em celular, tablet e computador.
+
+### Privacidade
+
+Não solicitar informações pessoais desnecessárias.
+
+### Gratuito
+
+Caso o modelo escolhido seja gratuito, deixar isso claro sem promessas enganosas.
+
+### Seguro
+
+Validar entradas e proteger o servidor contra abusos.
+
+---
+
+# 11. FAQ
+
+Criar uma FAQ completa.
+
+Perguntas:
+
+* Como baixar um vídeo?
+* Quais plataformas são compatíveis?
+* Preciso instalar algum programa?
+* Funciona no celular?
+* Posso baixar imagens?
+* O serviço é gratuito?
+* Por que algumas URLs não funcionam?
+* Por que determinado formato não aparece?
+* O conteúdo fica armazenado no servidor?
+* Posso baixar qualquer conteúdo?
+* O que devo fazer se tenho direitos sobre o conteúdo?
+* Por quanto tempo os arquivos ficam disponíveis?
+
+Respostas claras, originais e úteis.
+
+Não criar conteúdo artificial apenas para SEO.
+
+---
+
+# 12. PÁGINA SOBRE
+
+Criar uma página:
+
+**Sobre nós**
+
+Explicar:
+
+* objetivo da plataforma;
+* como ela funciona;
+* compromisso com simplicidade;
+* privacidade;
+* segurança;
+* uso responsável;
+* respeito aos direitos autorais.
+
+Não inventar empresa, endereço, equipe ou informações falsas.
+
+Usar placeholders claramente identificados quando informações reais forem necessárias.
+
+---
+
+# 13. CONTATO
+
+Criar página:
+
+**Contato**
+
+Campos:
+
+Nome
+E-mail
+Assunto
+Mensagem
+
+Captcha ou mecanismo anti-spam.
+
+Validação no frontend E backend.
+
+Mensagem de sucesso:
+
+> Sua mensagem foi enviada com sucesso.
+
+Não armazenar dados desnecessários.
+
+Criar proteção contra:
+
+* spam;
+* XSS;
+* injection;
+* abuso do formulário.
+
+---
+
+# 14. PRIVACIDADE
+
+Criar página profissional:
+
+**Política de Privacidade**
+
+Explicar de forma transparente:
+
+* dados coletados;
+* dados técnicos;
+* cookies;
+* logs;
+* finalidade;
+* armazenamento;
+* terceiros;
+* serviços de análise;
+* publicidade;
+* direitos do usuário;
+* contato;
+* retenção de dados.
+
+Não inventar práticas que o sistema não utiliza.
+
+Criar placeholders para:
+
+[NOME DA EMPRESA]
+[E-MAIL]
+[PAÍS]
+[DATA DE ATUALIZAÇÃO]
+
+---
+
+# 15. TERMOS DE USO
+
+Criar:
+
+**Termos de Uso**
+
+Incluir:
+
+* aceitação;
+* uso permitido;
+* responsabilidade do usuário;
+* propriedade intelectual;
+* conteúdo de terceiros;
+* limitações;
+* disponibilidade;
+* suspensão de uso abusivo;
+* alterações;
+* contato.
+
+Deixar claro que o usuário é responsável por possuir autorização ou direitos necessários sobre o conteúdo que processar.
+
+---
+
+# 16. POLÍTICA DE COOKIES
+
+Criar:
+
+**Política de Cookies**
+
+Explicar:
+
+* cookies essenciais;
+* cookies analíticos;
+* cookies de publicidade;
+* finalidade;
+* gerenciamento;
+* consentimento.
+
+Criar banner de cookies compatível com uma experiência moderna.
+
+Não carregar cookies não essenciais antes do consentimento quando isso for exigido pela legislação aplicável.
+
+---
+
+# 17. BANNER DE COOKIES
+
+Criar banner discreto:
+
+**Nós utilizamos cookies**
+
+“Utilizamos cookies necessários para funcionamento e, quando autorizado, cookies de análise e publicidade para melhorar sua experiência.”
+
+Botões:
+
+**Aceitar**
+
+**Recusar**
+
+**Configurar**
+
+Criar painel de preferências.
+
+---
+
+# 18. GOOGLE ADSENSE
+
+Preparar o projeto tecnicamente para monetização.
+
+IMPORTANTE:
+
+Não afirmar que o site será aprovado pelo Google AdSense.
+
+A estrutura deve ser compatível com boas práticas de monetização e políticas aplicáveis.
+
+Não colocar:
+
+* anúncios em cima do botão principal;
+* anúncios simulando botões de download;
+* anúncios próximos demais dos controles;
+* anúncios enganosos;
+* cliques incentivados;
+* conteúdo copiado;
+* páginas vazias;
+* excesso de publicidade.
+
+Criar espaços reservados para anúncios:
+
+* Header/Top;
+* entre seções;
+* conteúdo;
+* sidebar no desktop;
+* áreas responsivas.
+
+Os espaços devem ser visualmente separados da ferramenta.
+
+Adicionar comentário no código:
+
+<!-- ADSENSE SLOT -->
+
+Não inserir código real do AdSense até que o proprietário forneça o código oficial.
+
+---
+
+# 19. SEO
+
+Criar SEO técnico completo.
+
+Cada página deve possuir:
+
+* title;
+* meta description;
+* canonical;
+* Open Graph;
+* Twitter/X Card;
+* robots;
+* sitemap.xml;
+* robots.txt;
+* favicon;
+* URLs amigáveis;
+* headings hierárquicos;
+* schema.org quando apropriado.
+
+Criar estrutura:
+
+/
+
+/como-funciona
+
+/plataformas
+
+/faq
+
+/sobre
+
+/contato
+
+/privacidade
+
+/termos
+
+/cookies
+
+Não criar centenas de páginas artificiais para manipular SEO.
+
+---
+
+# 20. PERFORMANCE
+
+O site precisa carregar rapidamente.
+
+Otimizar:
+
+* CSS;
+* JavaScript;
+* imagens;
+* fontes;
+* cache;
+* compressão;
+* lazy loading;
+* carregamento assíncrono;
+* bundle size.
+
+Evitar bibliotecas pesadas quando uma solução simples resolver.
+
+Objetivo:
+
+Excelente Core Web Vitals.
+
+---
+
+# 21. DESIGN
+
+Criar design premium.
+
+Características:
+
+* moderno;
+* minimalista;
+* tecnológico;
+* profissional;
+* elegante;
+* confiável.
+
+Evitar:
+
+* excesso de cores;
+* gradientes exagerados;
+* animações inúteis;
+* excesso de elementos;
+* aparência de site genérico;
+* visual de template barato.
+
+Usar:
+
+* bastante espaço;
+* tipografia moderna;
+* cards elegantes;
+* sombras sutis;
+* bordas arredondadas;
+* microinterações;
+* ícones consistentes.
+
+O foco principal deve ser o campo:
+
+**Cole sua URL**
+
+---
+
+# 22. DARK MODE
+
+Adicionar:
+
+☀️ Light
+
+🌙 Dark
+
+Salvar preferência do usuário.
+
+Respeitar:
+
+prefers-color-scheme.
+
+---
+
+# 23. MOBILE FIRST
+
+O site deve ser projetado primeiro para celular.
+
+Verificar:
+
+320px
+375px
+390px
+414px
+768px
+1024px
+1440px
+1920px
+
+Garantir que:
+
+* botões sejam fáceis de tocar;
+* textos sejam legíveis;
+* formulário não quebre;
+* anúncios não causem overflow;
+* cards sejam responsivos;
+* menu funcione corretamente.
+
+---
+
+# 24. SEGURANÇA
+
+Implementar:
+
+* validação de URL;
+* sanitização;
+* rate limiting;
+* proteção contra SSRF;
+* proteção contra XSS;
+* CSRF quando aplicável;
+* validação de MIME;
+* limites de tamanho;
+* timeout;
+* tratamento de erros;
+* logs;
+* bloqueio de abuso;
+* controle de requisições.
+
+NUNCA confiar somente na validação do frontend.
+
+Validar tudo no backend.
+
+Criar mecanismos para impedir que usuários utilizem o servidor como proxy arbitrário para acessar recursos internos.
+
+---
+
+# 25. ARQUITETURA
+
+Separar claramente:
+
+Frontend
+Backend
+Serviços
+Adaptadores de plataforma
+Utilitários
+Configurações
+Logs
+Banco de dados
+
+Criar uma arquitetura onde seja possível adicionar uma nova plataforma sem reescrever o sistema inteiro.
+
+Exemplo conceitual:
+
+PlatformAdapter
+
+YouTubeAdapter
+
+FacebookAdapter
+
+TikTokAdapter
+
+PinterestAdapter
+
+KwaiAdapter
+
+etc.
+
+Não implementar APIs inexistentes.
+
+Não inventar endpoints.
+
+Não colocar tokens ou chaves secretas no frontend.
+
+---
+
+# 26. SISTEMA DE ERROS
+
+Nunca mostrar erros técnicos ao usuário.
+
+Exemplo ruim:
+
+“Error: subprocess exited with code 1”
+
+Usar:
+
+**Não conseguimos processar esta URL.**
+
+Possíveis motivos:
+
+* URL inválida;
+* conteúdo privado;
+* plataforma indisponível;
+* formato não suportado;
+* conteúdo protegido;
+* limite temporário atingido.
+
+Adicionar botão:
+
+**Tentar novamente**
+
+---
+
+# 27. LOADING
+
+Criar loading profissional.
+
+Exemplo:
+
+“Analisando URL…”
+
+Depois:
+
+“Preparando opções…”
+
+Nunca deixar o usuário sem feedback.
+
+Adicionar timeout e mensagem apropriada.
+
+---
+
+# 28. HISTÓRICO
+
+Se fizer sentido para a arquitetura, criar histórico local opcional.
+
+Não exigir cadastro para funções básicas.
+
+Se o usuário não estiver autenticado:
+
+usar armazenamento local apenas quando apropriado.
+
+Não armazenar conteúdo sem necessidade.
+
+---
+
+# 29. CADASTRO
+
+A prioridade é:
+
+**não exigir cadastro para usar a ferramenta básica.**
+
+Caso seja necessário criar contas futuramente, preparar arquitetura para:
+
+* Google OAuth;
+* e-mail/senha;
+* recuperação de senha;
+* sessão segura;
+* exclusão de conta.
+
+Mas NÃO tornar o cadastro obrigatório sem uma justificativa de produto.
+
+Quanto menos obstáculos, melhor a experiência.
+
+---
+
+# 30. ADMIN
+
+Criar arquitetura preparada para um painel administrativo.
+
+Futuro painel:
+
+/admin
+
+Possibilidades:
+
+* usuários;
+* solicitações;
+* estatísticas;
+* erros;
+* plataformas;
+* bloqueios;
+* configurações;
+* anúncios;
+* mensagens de contato.
+
+Proteger completamente essa área.
+
+Não deixar painel administrativo acessível sem autenticação.
+
+---
+
+# 31. ANALYTICS
+
+Preparar integração futura com ferramentas de análise.
+
+Não inserir IDs falsos.
+
+Criar configurações:
+
+ANALYTICS_ID=
+
+ADSENSE_ID=
+
+GA4_ID=
+
+etc.
+
+Tudo via variáveis de ambiente.
+
+---
+
+# 32. PÁGINA 404
+
+Criar uma página 404 premium.
+
+Mensagem:
+
+**Ops! Essa página não foi encontrada.**
+
+Botão:
+
+**Voltar para o início**
+
+---
+
+# 33. FOOTER
+
+Footer profissional contendo:
+
+Ferramenta
+
+Como funciona
+Plataformas
+FAQ
+
+Empresa
+
+Sobre
+Contato
+
+Legal
+
+Privacidade
+Termos de Uso
+Cookies
+
+Adicionar:
+
+© [ANO] [NOME DO PROJETO]. Todos os direitos reservados.
+
+Aviso:
+
+> Este serviço não possui afiliação, associação ou endosso oficial pelas plataformas mencionadas.
+
+---
+
+# 34. ACESSIBILIDADE
+
+Implementar:
+
+* HTML semântico;
+* labels;
+* aria-label quando necessário;
+* navegação por teclado;
+* contraste adequado;
+* foco visível;
+* textos alternativos;
+* botões acessíveis.
+
+---
+
+# 35. SEO CONTENT
+
+Criar conteúdo original para as páginas institucionais.
+
+Não copiar textos de outros sites.
+
+Não utilizar keyword stuffing.
+
+Não criar textos inúteis somente para aumentar quantidade de palavras.
+
+O conteúdo deve realmente ajudar o usuário.
+
+---
+
+# 36. PROTEÇÃO CONTRA ABUSO
+
+Criar limites:
+
+* requisições por IP;
+* tamanho máximo;
+* timeout;
+* concorrência;
+* fila de processamento;
+* limpeza automática de arquivos temporários.
+
+Arquivos temporários devem ser excluídos automaticamente após o período necessário.
+
+Não manter downloads indefinidamente no servidor.
+
+---
+
+# 37. LOGS
+
+Criar logs úteis para o administrador:
+
+* timestamp;
+* plataforma;
+* status;
+* duração;
+* erro;
+* código de erro;
+* IP anonimizado quando apropriado.
+
+Não registrar dados sensíveis desnecessariamente.
+
+---
+
+# 38. TESTES
+
+Antes de considerar o projeto pronto, testar:
+
+### Frontend
+
+* Chrome;
+* Edge;
+* Firefox;
+* celular.
+
+### Funcionalidade
+
+* URL válida;
+* URL inválida;
+* URL vazia;
+* plataforma não suportada;
+* conteúdo privado;
+* erro de rede;
+* timeout;
+* arquivo inexistente.
+
+### Segurança
+
+* XSS;
+* SSRF;
+* injection;
+* abuso de endpoint;
+* rate limit.
+
+### SEO
+
+* sitemap;
+* robots;
+* canonical;
+* metadata;
+* headings;
+* schema.
+
+---
+
+# 39. DOCUMENTAÇÃO
+
+Criar:
+
+README.md
+
+Explicar:
+
+* requisitos;
+* instalação;
+* configuração;
+* variáveis de ambiente;
+* desenvolvimento;
+* produção;
+* deploy;
+* manutenção;
+* arquitetura;
+* como adicionar uma nova plataforma.
+
+Criar também:
+
+.env.example
+
+Nunca colocar secrets reais.
+
+---
+
+# 40. REGRA FUNDAMENTAL DO DESENVOLVIMENTO
+
+NÃO tente fazer tudo de uma vez.
+
+Trabalhe em etapas.
+
+## ETAPA 1
+
+Analise o ambiente atual.
+
+Não altere nada.
+
+Mostre:
+
+* stack encontrada;
+* arquivos existentes;
+* servidor;
+* banco;
+* dependências;
+* problemas encontrados;
+* recomendação arquitetural.
+
+Depois aguarde minha autorização.
+
+## ETAPA 2
+
+Criar estrutura base.
+
+## ETAPA 3
+
+Criar Home e interface.
+
+## ETAPA 4
+
+Criar backend.
+
+## ETAPA 5
+
+Criar adaptadores de plataformas.
+
+## ETAPA 6
+
+Criar páginas institucionais.
+
+## ETAPA 7
+
+SEO.
+
+## ETAPA 8
+
+Segurança.
+
+## ETAPA 9
+
+Performance.
+
+## ETAPA 10
+
+Testes.
+
+## ETAPA 11
+
+Deploy.
+
+---
+
+# 41. REGRA DE OURO
+
+Antes de escrever código:
+
+**PENSE.**
+
+Antes de modificar arquivos:
+
+**ANALISE.**
+
+Antes de instalar dependências:
+
+**VERIFIQUE.**
+
+Antes de apagar qualquer coisa:
+
+**PEÇA AUTORIZAÇÃO.**
+
+Antes de considerar terminado:
+
+**TESTE.**
+
+Não invente APIs.
+
+Não invente credenciais.
+
+Não invente integrações.
+
+Não invente resultados.
+
+Se alguma funcionalidade depender de uma API externa, explique exatamente o que é necessário.
+
+---
+
+# 42. EXPERIÊNCIA DO USUÁRIO
+
+O usuário deve entender o site em menos de 5 segundos.
+
+A Home deve responder imediatamente:
+
+**O que é?**
+
+**Como funciona?**
+
+**Onde coloco minha URL?**
+
+O objetivo é que o usuário não precise ler um tutorial para utilizar a ferramenta.
+
+---
+
+# 43. PRINCÍPIO DE PRIMEIROS PRINCÍPIOS
+
+A pergunta principal durante o desenvolvimento deve ser:
+
+> “Qual é a maneira mais simples, rápida, segura e confiável de resolver esse problema para o usuário?”
+
+Se uma funcionalidade não melhora:
+
+* experiência;
+* segurança;
+* conversão;
+* desempenho;
+* manutenção;
+
+considere removê-la.
+
+Não construir complexidade apenas porque outros sites possuem.
+
+---
+
+# 44. RESULTADO FINAL
+
+O resultado deve parecer uma startup tecnológica profissional, não um script de download colocado dentro de uma página.
+
+A plataforma precisa transmitir:
+
+**velocidade + simplicidade + confiança + tecnologia + profissionalismo.**
+
+O usuário deve conseguir entrar, colar uma URL e entender imediatamente o que fazer.
+
+---
+
+# PRIMEIRA AÇÃO
+
+NÃO comece programando.
+
+Primeiro analise completamente o ambiente onde este projeto será desenvolvido.
+
+Depois me entregue um relatório curto contendo:
+
+1. Ambiente detectado
+2. Stack recomendada
+3. Arquitetura proposta
+4. Estrutura de pastas
+5. Dependências necessárias
+6. Riscos técnicos
+7. Riscos relacionados às plataformas
+8. Estratégia de segurança
+9. Estratégia SEO
+10. Estratégia de monetização
+11. Plano de desenvolvimento em etapas
+
+Depois disso, **PARE e aguarde minha autorização para iniciar a implementação.**

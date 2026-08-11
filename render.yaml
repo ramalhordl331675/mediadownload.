@@ -1,0 +1,37 @@
+# Render Blueprint — deploy com um clique.
+# Cria um Web Service que builda o Dockerfile (Node + ffmpeg + yt-dlp)
+# e serve o frontend estático e a API no mesmo domínio.
+#
+# Passos:
+#   1. Conecte este repositório no Render.
+#   2. "New > Blueprint" e selecione este repositório (usa o render.yaml).
+#   3. Defina CORS_ORIGIN / API_PUBLIC_URL no painel se necessário.
+services:
+  - type: web
+    name: mediadownload
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      # Mesmo-origem (recomendado): frontend e API no mesmo domínio, sem CORS.
+      # Só preencha se for servir o frontend em outro domínio (ex.: Netlify):
+      #   - key: CORS_ORIGIN
+      #     value: https://seu-site.netlify.app
+      # URL pública da API (usada para canonical/ads/analytics). Opcional.
+      - key: API_PUBLIC_URL
+        sync: false
+      # Limites (ajuste conforme o plano do Render)
+      - key: MAX_CONCURRENT
+        value: 4
+      - key: RATE_LIMIT_MAX
+        value: 30
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 60000
+      - key: TEMP_FILE_TTL_MS
+        value: 1800000
