@@ -24,9 +24,10 @@ FROM node:22-slim AS runtime
 
 ENV NODE_ENV=production
 
-# ffmpeg (combinar/convertir) + ferramentas para baixar o yt-dlp
+# ffmpeg (combinar/convertir) + python3 (necessario para o binario do yt-dlp)
+# + ferramentas para baixar o yt-dlp
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends ffmpeg curl ca-certificates \
+  && apt-get install -y --no-install-recommends ffmpeg python3 curl ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
   && curl -L --fail --silent --show-error \
        -o /usr/local/bin/yt-dlp \
