@@ -26,6 +26,9 @@ services:
       # URL pública da API (usada para canonical/ads/analytics). Opcional.
       - key: API_PUBLIC_URL
         sync: false
+      # Mesmo-origem no Render (frontend e API no mesmo domínio).
+      - key: CORS_ORIGIN
+        value: ""
       # Limites (ajuste conforme o plano do Render)
       - key: MAX_CONCURRENT
         value: 4
