@@ -22,6 +22,13 @@ if (frontendDist && existsSync(frontendDist)) {
     root: frontendDist,
     wildcard: false,
     maxAge: '1h',
+    // HTML sempre revalida (referencia assets com hash novo).
+    // Assets com hash no nome ficam com cache longo via maxAge.
+    setHeaders(reply, path) {
+      if (path.endsWith('.html')) {
+        reply.header('Cache-Control', 'no-cache, must-revalidate');
+      }
+    },
   });
 
   app.setNotFoundHandler(async (req, reply) => {

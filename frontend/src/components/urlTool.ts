@@ -1,6 +1,7 @@
 import { buildDownloadUrl, processUrl, ApiError } from '../services/api';
 import type { FormatKind, FormatInfo } from '../services/api';
 import { escapeHtml } from '../utils/html';
+import { t } from '../services/i18n';
 
 interface ResultData {
   title: string;
@@ -32,7 +33,7 @@ const EXAMPLE_URLS = [
 function formatBytes(bytes: number | undefined): string {
   if (!bytes || bytes <= 0) return '';
   if (bytes >= 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`;
-  return `${Math.round(bytes / (1024 * 1024))} MB`;
+  return `${t('result.sizeApprox')} ${Math.round(bytes / (1024 * 1024))} MB`;
 }
 
 function formatDuration(seconds: number | undefined): string {
@@ -46,13 +47,13 @@ export function urlToolTemplate(): string {
   return `
     <section class="hero" id="ferramenta" aria-label="Ferramenta de download">
       <div class="container">
-        <span class="hero-badge" aria-hidden="true">
+        <span class="hero-badge" aria-hidden="true" data-i18n="hero.badge">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v1a5 5 0 0 1 3 4.6V18a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h4v-2a3 3 0 0 0-6-2.6A3 3 0 0 0 6 12v2h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-2.4A5 5 0 0 1 7 8V7a5 5 0 0 1 5-5z"/></svg>
           Download simplificado
         </span>
 
-        <h1>Cole. Processe. <span class="accent">Baixe.</span></h1>
-        <p class="hero-sub">Cole uma URL pública, processe o conteúdo e escolha uma opção disponível para download.</p>
+        <h1><span data-i18n="hero.title">Cole. Processe.</span> <span class="accent" data-i18n="hero.titleAccent">Baixe.</span></h1>
+        <p class="hero-sub" data-i18n="hero.sub">Cole uma URL pública, processe o conteúdo e escolha uma opção disponível para download.</p>
 
         <div class="url-tool" id="url-tool">
           <div class="url-panel" id="url-panel">
@@ -68,6 +69,7 @@ export function urlToolTemplate(): string {
                 type="url"
                 inputmode="url"
                 placeholder="Cole aqui a URL"
+                data-i18n-placeholder="hero.placeholder"
                 autocomplete="off"
                 spellcheck="false"
                 required
@@ -86,7 +88,7 @@ export function urlToolTemplate(): string {
           </div>
 
           <div class="url-hint" id="demo-link-wrap">
-            O download real depende do conteúdo. <button class="chip" id="demo-btn" type="button">Ver demonstração visual do resultado</button>
+            <span data-i18n="hero.demoHint">O download real depende do conteúdo.</span> <button class="chip" id="demo-btn" type="button" data-i18n="hero.demoBtn">Ver demonstração visual do resultado</button>
           </div>
 
           <div class="chips" role="group" aria-label="URLs de exemplo">
@@ -98,7 +100,7 @@ export function urlToolTemplate(): string {
           <div id="url-status" aria-live="polite"></div>
         </div>
 
-        <p class="hint-note">
+        <p class="hint-note" data-i18n="hero.legal">
           Use esta ferramenta somente para baixar conteúdos que você possui, tem autorização para utilizar ou cujo download seja permitido pelos termos da respectiva plataforma.
         </p>
       </div>
@@ -116,10 +118,10 @@ function loadingTemplate(message: string): string {
 }
 
 function kindLabel(kind: FormatKind | null): string {
-  if (kind === 'video') return 'Baixar vídeo';
-  if (kind === 'audio') return 'Baixar áudio';
-  if (kind === 'image') return 'Baixar imagem';
-  return 'Selecione uma opção';
+  if (kind === 'video') return t('result.downloadVideo');
+  if (kind === 'audio') return t('result.downloadAudio');
+  if (kind === 'image') return t('result.downloadImage');
+  return t('result.select');
 }
 
 function thumbTemplate(thumb: string | undefined): string {
@@ -141,7 +143,7 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
 
   return `
     <div class="result-wrap">
-      ${isDemo ? '<div class="demo-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg> Demonstração visual — nenhum download real é gerado</div>' : ''}
+      ${isDemo ? '<div class="demo-note"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg> <span data-i18n="demo.note">Demonstração visual — nenhum download real é gerado</span></div>' : ''}
       <section class="result-card" aria-label="Opções de download">
         <div class="result-body">
           ${thumbTemplate(result.thumbnail)}
@@ -155,9 +157,9 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
             <div class="format-group">
               ${videos.length
                 ? `<div class="format-block">
-                  <h4>Vídeo</h4>
+                  <h4 data-i18n="result.video">Vídeo</h4>
                   <div class="format-options" data-video-options>
-                    <button class="format-option" type="button" data-kind="video" data-format="MP4" data-quality="Melhor" data-id="best">Melhor qualidade</button>
+                    <button class="format-option" type="button" data-kind="video" data-format="MP4" data-quality="Melhor" data-id="best" data-i18n="result.best">Melhor qualidade</button>
                     ${videos
                       .map(
                         (f) =>
@@ -169,12 +171,12 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
                 : ''}
               ${audio.length
                 ? `<div class="format-block">
-                  <h4>Áudio MP3</h4>
+                  <h4 data-i18n="result.audio">Áudio MP3</h4>
                   <div class="format-options">
                     ${audio
                       .map(
                         () =>
-                          `<button class="format-option" type="button" data-kind="audio" data-format="MP3" data-quality="áudio" data-id="${escapeHtml(audio[0].id)}">Música (MP3)</button>`,
+                          `<button class="format-option" type="button" data-kind="audio" data-format="MP3" data-quality="áudio" data-id="${escapeHtml(audio[0].id)}" data-i18n="result.audioMusic">Música (MP3)</button>`,
                       )
                       .join('')}
                   </div>
@@ -182,12 +184,12 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
                 : ''}
               ${images.length
                 ? `<div class="format-block">
-                <h4>Imagem</h4>
+                <h4 data-i18n="result.image">Imagem</h4>
                 <div class="format-options">
                   ${images
                     .map(
                       (f) =>
-                        `<button class="format-option" type="button" data-kind="image" data-format="${escapeHtml(f.format)}" data-quality="${escapeHtml(f.quality)}" data-id="${escapeHtml(f.id)}">${escapeHtml(f.quality)}</button>`,
+                        `<button class="format-option" type="button" data-kind="image" data-format="${escapeHtml(f.format)}" data-quality="${escapeHtml(f.quality)}" data-id="${escapeHtml(f.id)}" data-i18n="result.original">${escapeHtml(f.quality)}</button>`,
                     )
                     .join('')}
                 </div>
@@ -198,7 +200,7 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
             <div class="download-row">
               <button class="btn btn-primary" type="button" data-download disabled>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                <span data-download-label>Selecione uma opção</span>
+                <span data-download-label>${t('result.select')}</span>
               </button>
               <span class="size-note" data-size-note></span>
             </div>
@@ -209,42 +211,17 @@ function resultTemplate(result: ResultData, isDemo: boolean): string {
   `;
 }
 
-const ERROR_MESSAGES: Record<string, { title: string; detail: string }> = {
-  'url-invalid': {
-    title: 'URL inválida.',
-    detail: 'Verifique o link colado e tente novamente.',
-  },
-  'content-private': {
-    title: 'Conteúdo privado.',
-    detail: 'Este vídeo ou mídia está marcado como privado e não pode ser processado.',
-  },
-  'platform-unsupported': {
-    title: 'Plataforma indisponível.',
-    detail: 'Esta plataforma ainda não é suportada ou está temporariamente indisponível.',
-  },
-  'process-failed': {
-    title: 'Não foi possível processar o conteúdo.',
-    detail: 'O formato não é suportado ou o conteúdo está protegido. Tente outra URL.',
-  },
-  'busy': {
-    title: 'Limite temporário atingido.',
-    detail: 'Muitas solicitações ao mesmo tempo. Aguarde alguns segundos e tente novamente.',
-  },
-  'too-large': {
-    title: 'Arquivo grande demais.',
-    detail: 'Este conteúdo excede o tamanho máximo permitido para download.',
-  },
-  'timeout': {
-    title: 'Tempo esgotado.',
-    detail: 'O processamento demorou demais. Tente novamente em alguns instantes.',
-  },
-};
+function errorInfo(code: string): { title: string; detail: string } {
+  const combined = t(`error.${code}`);
+  const idx = combined.indexOf('. ');
+  if (idx === -1) {
+    return { title: combined, detail: '' };
+  }
+  return { title: combined.slice(0, idx), detail: combined.slice(idx + 2) };
+}
 
 function errorTemplate(code: string): string {
-  const info = ERROR_MESSAGES[code] ?? {
-    title: 'Não conseguimos processar esta URL.',
-    detail: 'Tente novamente ou verifique se o conteúdo está disponível.',
-  };
+  const info = errorInfo(code);
   return `
     <div class="result-wrap">
       <section class="error-card" role="alert">
@@ -253,7 +230,7 @@ function errorTemplate(code: string): string {
           ${escapeHtml(info.title)}
         </h3>
         <p>${escapeHtml(info.detail)}</p>
-        <button class="btn btn-primary" type="button" data-retry>Tentar novamente</button>
+        <button class="btn btn-primary" type="button" data-retry>${escapeHtml(t('error.retry'))}</button>
       </section>
     </div>
   `;
@@ -300,7 +277,7 @@ export function initUrlTool(mount: HTMLElement): void {
         selection.kind = null;
         selection.format = '';
         selection.quality = '';
-        labelEl.textContent = 'Selecione uma opção';
+        labelEl.textContent = t('result.select');
         sizeEl.textContent = '';
         downloadBtn.disabled = true;
         return;
@@ -318,7 +295,7 @@ export function initUrlTool(mount: HTMLElement): void {
       if (size && size > 0) {
         sizeEl.textContent = `aprox. ${formatBytes(size)}`;
       } else {
-        sizeEl.textContent = 'Tamanho não informado';
+        sizeEl.textContent = t('result.sizeUnknown');
       }
     };
 
@@ -343,7 +320,7 @@ export function initUrlTool(mount: HTMLElement): void {
         if (selection.kind === null) return;
         downloadBtn.disabled = true;
         downloadBtn.querySelector<HTMLSpanElement>('[data-download-label]')?.replaceWith(
-          Object.assign(document.createElement('span'), { textContent: 'Demonstração — sem download real' }),
+          Object.assign(document.createElement('span'), { textContent: t('demo.done') }),
         );
         setTimeout(() => renderResultSelection(result), 1600);
         return;
@@ -381,7 +358,7 @@ export function initUrlTool(mount: HTMLElement): void {
     }
 
     setBusy(true);
-    renderStatus(loadingTemplate('Analisando URL…'));
+    renderStatus(loadingTemplate(t('loading.analyzing')));
 
     let valid = false;
     try {
@@ -402,7 +379,7 @@ export function initUrlTool(mount: HTMLElement): void {
       setBusy(false);
       if (res.ok && res.data) {
         sourceUrl = raw;
-        renderStatus(loadingTemplate('Preparando opções…'));
+        renderStatus(loadingTemplate(t('loading.preparing')));
         const data = res.data;
         setTimeout(() => {
           renderResult(
@@ -469,9 +446,9 @@ export function initUrlTool(mount: HTMLElement): void {
 
   demoBtn?.addEventListener('click', () => {
     setBusy(true);
-    renderStatus(loadingTemplate('Analisando URL…'));
+    renderStatus(loadingTemplate(t('loading.analyzing')));
     setTimeout(() => {
-      renderStatus(loadingTemplate('Preparando opções…'));
+      renderStatus(loadingTemplate(t('loading.preparing')));
       setTimeout(() => {
         setBusy(false);
         renderResult(DEMO, true);

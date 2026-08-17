@@ -96,6 +96,16 @@ export function downloadRoutes(app: FastifyInstance, deps: DownloadDeps): void {
       return reply.status(503).send({ ok: false, error: ErrorCodes.BUSY });
     }
 
+    // Garante que a permissão é devolvida exatamente uma vez, tanto no fluxo de
+    // sucesso quanto no de erro (evita liberar o semáforo duas vezes).
+    let released = false;
+    const release = (): void => {
+      if (!released) {
+        released = true;
+        deps.semaphore.release();
+      }
+    };
+
     const stem = deps.tempFiles.newDownloadStem();
 
     try {
@@ -114,7 +124,7 @@ export function downloadRoutes(app: FastifyInstance, deps: DownloadDeps): void {
         throw new Error('too-large');
       }
 
-      deps.semaphore.release();
+      release();
 
       const mime = MIME_BY_EXT[downloaded.extension] ?? 'application/octet-stream';
       const filename = `media_${Date.now()}.${downloaded.extension}`;
@@ -137,7 +147,7 @@ export function downloadRoutes(app: FastifyInstance, deps: DownloadDeps): void {
 
       return reply.send(stream);
     } catch (err) {
-      deps.semaphore.release();
+      release();
       const message = err instanceof Error ? err.message : '';
       const stderr = err instanceof Error && err.stack ? err.stack : '';
       const tooLarge = message === 'too-large';

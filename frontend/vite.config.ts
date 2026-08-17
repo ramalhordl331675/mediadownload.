@@ -5,6 +5,19 @@ export default defineConfig({
   envDir: '../',
   server: {
     port: 5173,
+    // Em dev, o frontend roda na 5173 e a API na 3000.
+    // Redireciona as chamadas da API para o mesmo domínio (VITE_API_URL vazio)
+    // ou para http://localhost:3000, sem depender de CORS no frontend.
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+      '/health': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     target: 'es2022',

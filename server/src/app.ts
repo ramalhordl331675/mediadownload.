@@ -59,10 +59,15 @@ export async function buildApp(deps: AppDeps): Promise<BuiltApp> {
     timeWindow: config.rateLimitWindowMs,
   });
 
-  await app.register(cors, {
-    origin: config.corsOrigin,
-    methods: ['GET', 'POST'],
-  });
+  // CORS só é necessário quando frontend e API estão em domínios diferentes.
+  // Origem vazia = mesmo domínio (deploy de peça única) → não registrar CORS,
+  // pois o @fastify/cors rejeita a string vazia e derruba todas as rotas.
+  if (config.corsOrigin) {
+    await app.register(cors, {
+      origin: config.corsOrigin,
+      methods: ['GET', 'POST'],
+    });
+  }
 
   // Headers de segurança (não dependem de bibliotecas adicionais)
   app.addHook('onSend', async (_req, reply) => {

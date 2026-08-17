@@ -17,52 +17,63 @@ export function platformsTemplate(): string {
     <section class="section" id="plataformas" aria-labelledby="plataformas-title">
       <div class="container">
         <div class="section-head">
-          <span class="section-eyebrow">Plataformas</span>
-          <h2 id="plataformas-title">Plataformas compatíveis</h2>
-          <p>Processamos URLs públicas das principais plataformas, sempre de acordo com as permissões de cada conteúdo.</p>
+          <span class="section-eyebrow" data-i18n="platforms.eyebrow">Plataformas</span>
+          <h2 id="plataformas-title" data-i18n="platforms.title">Plataformas compatíveis</h2>
+          <p data-i18n="platforms.sub">Processamos URLs públicas das principais plataformas, sempre de acordo com as permissões de cada conteúdo.</p>
         </div>
         <div class="platform-grid">
           ${PLATFORMS.map(
             (p) => `
-            <div class="platform-card">
-              <div class="platform-badge" aria-hidden="true">${escapeHtml(p.initial)}</div>
-              <h3>${escapeHtml(p.name)}</h3>
-              <p>URLs públicas</p>
-            </div>`,
+            <button
+              class="platform-card"
+              type="button"
+              data-platform="${p.name}"
+              data-i18n-title="platforms.public"
+            >
+              <span class="platform-badge" aria-hidden="true">${escapeHtml(p.initial)}</span>
+              <span class="platform-name">${escapeHtml(p.name)}</span>
+              <span class="platform-sub" data-i18n="platforms.public">URLs públicas</span>
+            </button>`,
           ).join('')}
         </div>
-        <p class="disclaimer">A disponibilidade pode variar conforme as características da plataforma e as permissões do conteúdo.</p>
+        <p class="disclaimer" data-i18n="platforms.disclaimer">A disponibilidade pode variar conforme as características da plataforma e as permissões do conteúdo.</p>
       </div>
     </section>
   `;
 }
 
+/**
+ * Cada card de plataforma leva o usuário ao campo de URL (rolando e focando).
+ * Em páginas sem a ferramenta (ex.: /plataformas), navega para a Home na âncora.
+ */
+export function initPlatforms(mount: HTMLElement): void {
+  mount.querySelectorAll<HTMLButtonElement>('.platform-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const input = document.querySelector<HTMLInputElement>('#url-input');
+      if (input) {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.setTimeout(() => input.focus(), 450);
+        return;
+      }
+      window.location.href = './#ferramenta';
+    });
+  });
+}
+
 export function howItWorksTemplate(): string {
   const steps = [
-    {
-      num: '01',
-      title: 'Cole a URL',
-      text: 'Copie a URL pública do conteúdo desejado.',
-    },
-    {
-      num: '02',
-      title: 'Processe',
-      text: 'Cole no campo e clique em processar.',
-    },
-    {
-      num: '03',
-      title: 'Escolha',
-      text: 'Selecione uma opção disponível e faça o download.',
-    },
+    { num: '01', title: 'Cole a URL', text: 'Copie a URL pública do conteúdo desejado.', key: 'how.step1' },
+    { num: '02', title: 'Processe', text: 'Cole no campo e clique em processar.', key: 'how.step2' },
+    { num: '03', title: 'Escolha', text: 'Selecione uma opção disponível e faça o download.', key: 'how.step3' },
   ];
 
   return `
     <section class="section" id="como-funciona" aria-labelledby="como-funciona-title">
       <div class="container">
         <div class="section-head">
-          <span class="section-eyebrow">Como funciona</span>
-          <h2 id="como-funciona-title">Três passos simples</h2>
-          <p>Sem cadastro, sem instalação e sem complicação.</p>
+          <span class="section-eyebrow" data-i18n="how.eyebrow">Como funciona</span>
+          <h2 id="como-funciona-title" data-i18n="how.title">Três passos simples</h2>
+          <p data-i18n="how.sub">Sem cadastro, sem instalação e sem complicação.</p>
         </div>
         <div class="steps-grid">
           ${steps
@@ -70,8 +81,8 @@ export function howItWorksTemplate(): string {
               (s) => `
             <div class="step-card">
               <span class="step-num">${s.num}</span>
-              <h3>${escapeHtml(s.title)}</h3>
-              <p>${escapeHtml(s.text)}</p>
+              <h3 data-i18n="${s.key}">${escapeHtml(s.title)}</h3>
+              <p data-i18n="${s.key}text">${escapeHtml(s.text)}</p>
             </div>`,
             )
             .join('')}
@@ -83,45 +94,21 @@ export function howItWorksTemplate(): string {
 
 export function benefitsTemplate(): string {
   const benefits = [
-    {
-      icon: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
-      title: 'Rápido',
-      text: 'Processamento otimizado para entregar opções o quanto antes.',
-    },
-    {
-      icon: '<path d="M4 8h16M4 16h16"/><circle cx="19" cy="8" r="2"/><circle cx="19" cy="16" r="2"/>',
-      title: 'Simples',
-      text: 'Interface sem complicação: cole, processe e escolha.',
-    },
-    {
-      icon: '<rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8m-4-4v4"/>',
-      title: 'Responsivo',
-      text: 'Funciona em celular, tablet e computador.',
-    },
-    {
-      icon: '<path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="m9 12 2 2 4-4"/>',
-      title: 'Privacidade',
-      text: 'Não solicitamos informações pessoais desnecessárias.',
-    },
-    {
-      icon: '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
-      title: 'Acessível',
-      text: 'Ferramenta básica disponível sem barreiras de cadastro.',
-    },
-    {
-      icon: '<path d="M12 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M18 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
-      title: 'Seguro',
-      text: 'Validação no servidor e proteção contra abuso e acesso indevido.',
-    },
+    { icon: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>', title: 'Rápido', text: 'Processamento otimizado para entregar opções o quanto antes.', key: 'fast' },
+    { icon: '<path d="M4 8h16M4 16h16"/><circle cx="19" cy="8" r="2"/><circle cx="19" cy="16" r="2"/>', title: 'Simples', text: 'Interface sem complicação: cole, processe e escolha.', key: 'simple' },
+    { icon: '<rect x="2" y="4" width="20" height="12" rx="2"/><path d="M8 20h8m-4-4v4"/>', title: 'Responsivo', text: 'Funciona em celular, tablet e computador.', key: 'responsive' },
+    { icon: '<path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="m9 12 2 2 4-4"/>', title: 'Privacidade', text: 'Não solicitamos informações pessoais desnecessárias.', key: 'privacy' },
+    { icon: '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', title: 'Acessível', text: 'Ferramenta básica disponível sem barreiras de cadastro.', key: 'accessible' },
+    { icon: '<path d="M12 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M18 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>', title: 'Seguro', text: 'Validação no servidor e proteção contra abuso e acesso indevido.', key: 'secure' },
   ];
 
   return `
     <section class="section" id="vantagens" aria-labelledby="vantagens-title">
       <div class="container">
         <div class="section-head text-center" style="margin-inline: auto">
-          <span class="section-eyebrow">Vantagens</span>
-          <h2 id="vantagens-title">Pensado para você</h2>
-          <p>Simplicidade e performance em primeiro lugar.</p>
+          <span class="section-eyebrow" data-i18n="benefits.eyebrow">Vantagens</span>
+          <h2 id="vantagens-title" data-i18n="benefits.title">Pensado para você</h2>
+          <p data-i18n="benefits.sub">Simplicidade e performance em primeiro lugar.</p>
         </div>
         <div class="benefit-grid">
           ${benefits
@@ -131,8 +118,8 @@ export function benefitsTemplate(): string {
               <div class="benefit-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${b.icon}</svg>
               </div>
-              <h3>${escapeHtml(b.title)}</h3>
-              <p>${escapeHtml(b.text)}</p>
+              <h3 data-i18n="benefit.${b.key}">${escapeHtml(b.title)}</h3>
+              <p data-i18n="benefit.${b.key}Text">${escapeHtml(b.text)}</p>
             </div>`,
             )
             .join('')}
@@ -144,10 +131,10 @@ export function benefitsTemplate(): string {
 
 export function trustTemplate(): string {
   const items = [
-    { value: 'Sem cadastro', label: 'use direto da Home' },
-    { value: 'Sem instalação', label: '100% no navegador' },
-    { value: 'Sem dados pessoais', label: 'privacidade primeiro' },
-    { value: 'Sempre do servidor', label: 'sem proxy arbitrário' },
+    { value: 'Sem cadastro', label: 'use direto da Home', key: '1' },
+    { value: 'Sem instalação', label: '100% no navegador', key: '2' },
+    { value: 'Sem dados pessoais', label: 'privacidade primeiro', key: '3' },
+    { value: 'Sempre do servidor', label: 'sem proxy arbitrário', key: '4' },
   ];
 
   return `
@@ -158,8 +145,8 @@ export function trustTemplate(): string {
             .map(
               (i) => `
             <div class="trust-item">
-              <strong>${escapeHtml(i.value)}</strong>
-              <span>${escapeHtml(i.label)}</span>
+              <strong data-i18n="trust.${i.key}">${escapeHtml(i.value)}</strong>
+              <span data-i18n="trust.${i.key}label">${escapeHtml(i.label)}</span>
             </div>`,
             )
             .join('')}
@@ -225,9 +212,9 @@ export function faqTemplate(): string {
     <section class="section" id="faq" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-head">
-          <span class="section-eyebrow">FAQ</span>
-          <h2 id="faq-title">Perguntas frequentes</h2>
-          <p>Respostas diretas para as dúvidas mais comuns.</p>
+          <span class="section-eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+          <h2 id="faq-title" data-i18n="faq.title">Perguntas frequentes</h2>
+          <p data-i18n="faq.sub">Respostas diretas para as dúvidas mais comuns.</p>
         </div>
         <div class="faq-list">
           ${FAQ_ITEMS.map(
@@ -235,12 +222,12 @@ export function faqTemplate(): string {
             <div class="faq-item" id="faq-item-${i}">
               <h3>
                 <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-${i}" data-faq-q>
-                  <span>${escapeHtml(item.q)}</span>
+                  <span data-i18n="faq.q${i + 1}">${escapeHtml(item.q)}</span>
                   <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
               </h3>
               <div class="faq-answer" id="faq-answer-${i}" role="region">
-                <p>${escapeHtml(item.a)}</p>
+                <p data-i18n="faq.a${i + 1}">${escapeHtml(item.a)}</p>
               </div>
             </div>`,
           ).join('')}
@@ -292,31 +279,43 @@ export function ctaTemplate(): string {
     <section class="section" aria-labelledby="cta-title">
       <div class="container">
         <div class="cta-wrap">
-          <h2 id="cta-title">Pronto para começar?</h2>
-          <p>Cole sua primeira URL e veja o que está disponível em segundos.</p>
-          <a class="btn btn-invert" href="#url-input">Cole sua URL agora</a>
+          <h2 id="cta-title" data-i18n="cta.title">Pronto para começar?</h2>
+          <p data-i18n="cta.sub">Cole sua primeira URL e veja o que está disponível em segundos.</p>
+          <a class="btn btn-invert" href="#url-input" data-i18n="cta.btn">Cole sua URL agora</a>
         </div>
       </div>
     </section>
   `;
 }
 
-const FOOTER_LINKS = {
-  Ferramenta: [
-    { label: 'Como funciona', href: './como-funciona.html' },
-    { label: 'Plataformas', href: './plataformas.html' },
-    { label: 'FAQ', href: './faq.html' },
-  ],
-  Empresa: [
-    { label: 'Sobre', href: './sobre.html' },
-    { label: 'Contato', href: './contato.html' },
-  ],
-  Legal: [
-    { label: 'Privacidade', href: './privacidade.html' },
-    { label: 'Termos de Uso', href: './termos.html' },
-    { label: 'Cookies', href: './cookies.html' },
-  ],
-};
+const FOOTER_LINKS = [
+  {
+    title: 'Ferramenta',
+    titleKey: 'footer.tool',
+    links: [
+      { label: 'Como funciona', i18n: 'nav.how', href: './como-funciona.html' },
+      { label: 'Plataformas', i18n: 'nav.platforms', href: './plataformas.html' },
+      { label: 'FAQ', i18n: 'nav.faq', href: './faq.html' },
+    ],
+  },
+  {
+    title: 'Empresa',
+    titleKey: 'footer.company',
+    links: [
+      { label: 'Sobre', i18n: 'nav.about', href: './sobre.html' },
+      { label: 'Contato', i18n: 'nav.contact', href: './contato.html' },
+    ],
+  },
+  {
+    title: 'Legal',
+    titleKey: 'footer.legal',
+    links: [
+      { label: 'Privacidade', i18n: 'footer.link.privacy', href: './privacidade.html' },
+      { label: 'Termos de Uso', i18n: 'footer.link.terms', href: './termos.html' },
+      { label: 'Cookies', i18n: 'footer.link.cookies', href: './cookies.html' },
+    ],
+  },
+];
 
 export function sobreTemplate(): string {
   return `
@@ -338,17 +337,17 @@ export function sobreTemplate(): string {
 }
 
 export function footerTemplate(): string {
-  const cols = Object.entries(FOOTER_LINKS)
-    .map(
-      ([title, links]) => `
+  const cols = FOOTER_LINKS.map(
+    (col) => `
       <div class="footer-col">
-        <h4>${escapeHtml(title)}</h4>
+        <h4 data-i18n="${col.titleKey}">${escapeHtml(col.title)}</h4>
         <ul>
-          ${links.map((l) => `<li><a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a></li>`).join('')}
+          ${col.links
+            .map((l) => `<li><a href="${escapeHtml(l.href)}" data-i18n="${l.i18n}">${escapeHtml(l.label)}</a></li>`)
+            .join('')}
         </ul>
       </div>`,
-    )
-    .join('');
+  ).join('');
 
   return `
     <footer class="site-footer">
@@ -359,13 +358,13 @@ export function footerTemplate(): string {
               ${brandMarkHtml()}
               ${brandWordmarkHtml()}
             </a>
-            <p>${BRAND_TAGLINE} Ferramenta simples para processar URLs públicas e oferecer opções de download quando permitido.</p>
+            <p data-i18n="footer.desc">${BRAND_TAGLINE} Ferramenta simples para processar URLs públicas e oferecer opções de download quando permitido.</p>
           </div>
           ${cols}
         </div>
         <div class="footer-bottom">
-          <span>© <span id="footer-year"></span> MediaSnap. Todos os direitos reservados.</span>
-          <span>Este serviço não possui afiliação, associação ou endosso oficial pelas plataformas mencionadas.</span>
+          <span>© <span id="footer-year"></span> MediaSnap. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+          <span data-i18n="footer.disclaimer">Este serviço não possui afiliação, associação ou endosso oficial pelas plataformas mencionadas.</span>
         </div>
       </div>
     </footer>

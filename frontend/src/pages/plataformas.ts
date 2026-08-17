@@ -1,5 +1,5 @@
 import { mountShell } from '../bootstrap';
-import { PLATFORMS } from '../components/sections';
+import { PLATFORMS, initPlatforms } from '../components/sections';
 import { institutionalPage } from './pageLayout';
 
 export function renderPlataformas(): void {
@@ -8,11 +8,11 @@ export function renderPlataformas(): void {
       <div class="container">
         <div class="platform-grid">${PLATFORMS.map(
           (p) => `
-          <div class="platform-card">
-            <div class="platform-badge" aria-hidden="true">${p.initial}</div>
-            <h3>${p.name}</h3>
-            <p>URLs públicas</p>
-          </div>`,
+          <button class="platform-card" type="button" data-platform="${p.name}" data-i18n-title="platforms.public">
+            <span class="platform-badge" aria-hidden="true">${p.initial}</span>
+            <span class="platform-name">${p.name}</span>
+            <span class="platform-sub" data-i18n="platforms.public">URLs públicas</span>
+          </button>`,
         ).join('')}
         </div>
       </div>
@@ -43,7 +43,8 @@ export function renderPlataformas(): void {
       },
     ]) + cards;
 
-  mountShell(html);
+  const { app } = mountShell(html);
+  initPlatforms(app);
 }
 
 renderPlataformas();

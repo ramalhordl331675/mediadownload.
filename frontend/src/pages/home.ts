@@ -6,6 +6,7 @@ import {
   faqTemplate,
   howItWorksTemplate,
   initFaq,
+  initPlatforms,
   platformsTemplate,
   sobreTemplate,
   trustTemplate,
@@ -40,5 +41,6 @@ export function renderHome(): void {
     initUrlTool(toolMount);
   }
 
+  initPlatforms(app);
   initFaq(app);
 }
