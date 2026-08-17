@@ -1,16 +1,32 @@
-node_modules
-**/node_modules
-**/dist
-**/logs
-logs
-temp
-downloads
-previews
+# Dependencias locais (nunca enviar ao build do Docker)
+node_modules/
+frontend/node_modules/
+server/node_modules/
+
+# Artefatos de build locais
+dist/
+frontend/dist/
+server/dist/
+coverage/
+*.tsbuildinfo
+
+# Ambiente e segredos
 .env
-.env.*
+.env.local
+.env.*.local
+
+# Logs, downloads e temporarios
+logs/
 *.log
+temp/
+downloads/
+
+# Git
 .git
 .gitignore
+.github/
 .dockerignore
-Dockerfile
-README.md
+
+# OS
+.DS_Store
+Thumbs.db
